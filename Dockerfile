@@ -2,6 +2,9 @@
 FROM eclipse-temurin:21-jdk-alpine AS builder
 WORKDIR /app
 
+# Instalar Maven
+RUN apk add --no-cache maven
+
 # Copiar pom.xml primero para aprovechar la caché de capas de Docker
 COPY pom.xml .
 RUN mvn dependency:go-offline -q 2>/dev/null || true
